@@ -1,0 +1,71 @@
+body {font-family: Arial, Helvetica, sans-serif;
+margin: 20px;
+background-color: yellow;}
+
+ .heading{
+ color: blue;
+ font-size: xx-large;
+ text-align: center;
+ margin-top: 30px;
+ margin-bottom: 30px;   
+ }
+
+ .mainn{
+ max-width: 80%;
+ margin: auto;
+ padding: 20px;
+ border-radius: 8px;
+ text-align: center;
+ margin-bottom: 100px;
+ position: relative;
+
+ }
+
+.personal{
+color: burlywood;
+background-color: brown;
+text-align: center;
+padding: 15px;
+font-size: x-large;
+
+}
+
+
+.forpic{
+color: brown;    
+}
+
+input[type="file"]{
+font-size: 16px;
+padding: 10px;
+width: 250px;
+background-color: aqua;
+border-radius: 30px;
+margin-top: 20px;
+
+}
+
+input[type="file"]::file.selector-button{
+background-color: aqua;
+cursor: pointer;
+font-size: large;
+color: yellowgreen;
+border-color: blue;
+border-radius: 10px;
+
+}
+form{
+margin-bottom: 40px;    
+}
+
+input,textarea{
+display: block;
+margin-bottom: 10px;
+width: 100%;
+padding: 8px;
+font-size: 14px;
+background-color: aqua;
+border-width: 3px;
+
+}
+
