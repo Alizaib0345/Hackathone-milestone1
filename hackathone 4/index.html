@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shareable Resume Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Shareable Resume Generator</h1>
+    <form id="resumeForm">
+        <fieldset>
+            <legend>Personal Information</legend>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" placeholder="Enter your name" required>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+            <label for="phone">Phone:</label>
+            <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
+            <label for="picture">Upload Picture:</label>
+            <input type="file" id="picture" accept="image/*">
+        </fieldset>
+        <fieldset>
+            <legend>Experience</legend>
+            <label for="experience">Experience:</label>
+            <textarea id="experience" rows="4" placeholder="Describe your experience..." required></textarea>
+        </fieldset>
+        <fieldset>
+            <legend>Skills</legend>
+            <label for="skills">Skills:</label>
+            <textarea id="skills" rows="4" placeholder="List your skills..." required></textarea>
+        </fieldset>
+        <button type="submit">Generate Resume</button>
+    </form>
+    <div id="resumeOutput"></div>
+<button id="shareButton" style="display: none;" onclick="generateShareableLink()">Generate Shareable URL</button>
+<div id="shareableLink" style="margin-top: 10px;"></div>
+
+
+    <script>
+        document.getElementById('resumeForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const experience = document.getElementById('experience').value;
+            const skills = document.getElementById('skills').value;
+
+            const resumeOutput = `
+                <h2>Generated Resume</h2>
+                <p><strong>Name:</strong> ${name}</p>
+                <p><strong>Email:</strong> ${email}</p>
+                <p><strong>Phone:</strong> ${phone}</p>
+                <h3>Experience</h3>
+                <p>${experience}</p>
+                <h3>Skills</h3>
+                <p>${skills}</p>
+            `;
+
+            document.getElementById('resumeOutput').innerHTML = resumeOutput;
+
+            // Show the share button
+            document.getElementById('shareButton').style.display = 'block';
+        });
+
+        document.getElementById('shareButton').addEventListener('click', function() {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const experience = document.getElementById('experience').value;
+            const skills = document.getElementById('skills').value;
+
+            const urlParams = new URLSearchParams({
+                name: name,
+                email: email,
+                phone: phone,
+                experience: experience,
+                skills: skills
+            });
+
+            const shareableURL = `${window.location.origin}${window.location.pathname}?${urlParams.toString()}`;
+
+            const linkElement = `<a href="${shareableURL}" target="_blank">Click here to view your shareable resume</a>`;
+
+            document.getElementById('shareableLink').innerHTML = linkElement;
+        });
+
+        // Pre-fill the form if URL parameters are present
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('name')) {
+            document.getElementById('name').value = urlParams.get('name');
+            document.getElementById('email').value = urlParams.get('email');
+            document.getElementById('phone').value = urlParams.get('phone');
+            document.getElementById('experience').value = urlParams.get('experience');
+            document.getElementById('skills').value = urlParams.get('skills');
+            document.getElementById('resumeForm').dispatchEvent(new Event('submit'));
+        }
+    </script>
+</body>
+</html>
